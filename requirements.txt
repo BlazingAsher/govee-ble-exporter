@@ -1,0 +1,7 @@
+bleak==0.22.2
+bluetooth-data-tools==1.20.0
+sensor-state-data==2.18.1
+prometheus_client==0.20.0
+fastapi==0.112.2
+APScheduler==3.10.4
+uvicorn==0.30.6
