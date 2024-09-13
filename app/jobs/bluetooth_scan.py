@@ -1,11 +1,11 @@
 """
-Detection callback w/ scanner
+Detection callback w/ scanner (from the bleak repository examples folder)
 --------------
 
 Example showing what is returned using the callback upon detection functionality
 
 Updated on 2020-10-11 by bernstern <bernie@allthenticate.net>
-Updated on 2025-09-12 by BlazingAsher
+Updated on 2024-09-12 by BlazingAsher
 
 """
 
