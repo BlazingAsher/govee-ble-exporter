@@ -1,0 +1,14 @@
+[Unit]
+Description=Govee BLE Exporter Service
+After=network.target
+
+[Service]
+Type=simple
+User=govee-ble-exporter
+WorkingDirectory=/opt/govee-ble-exporter
+EnvironmentFile=/etc/default/govee-ble-exporter
+ExecStart=/opt/govee-ble-exporter/venv/bin/python /opt/govee-ble-exporter/main.py
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
