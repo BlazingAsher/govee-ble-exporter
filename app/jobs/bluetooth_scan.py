@@ -23,6 +23,7 @@ from sensor_state_data import SensorLibrary, DeviceClass, DeviceKey
 
 from app.lib.structs import BluetoothServiceInfo
 from app.lib.govee_ble import GoveeBluetoothDeviceData
+from app.utils.constants import SCAN_DURATION
 
 logger = logging.getLogger(__name__)
 
@@ -78,4 +79,4 @@ async def run():
     )
     logger.info("Starting Bluetooth scanner.")
     async with scanner:
-        await asyncio.sleep(15.0)
+        await asyncio.sleep(SCAN_DURATION)
