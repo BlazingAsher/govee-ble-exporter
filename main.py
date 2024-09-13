@@ -37,7 +37,7 @@ if __name__ == "__main__":
     uvicorn.config.LOGGING_CONFIG["formatters"]["access"]["fmt"] = '%(asctime)s %(levelprefix)s %(client_addr)s - "%(request_line)s" %(status_code)s'
     uvicorn.config.LOGGING_CONFIG["loggers"]["app"] = {
         'handlers': ['default'],
-        'level': 'DEBUG',
+        'level': 'INFO',
         'propagate': False
     }
 
