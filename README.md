@@ -40,3 +40,7 @@ Since Docker doesn't really play well with Bluetooth, you can run this as a syst
 ## Updating
 To update the exporter, you can run a git pull when you're in the repository directory (eg. `/opt/govee-ble-exporter`): `sudo su govee-ble-exporter -s /bin/sh -c "git pull"`.
 Then, simply restart the service using systemd: `sudo systemctl restart govee-ble-exporter.service`.
+
+## Grafana Dashboard
+I have created a basic Grafana dashboard to visualize all the metrics exported by the exporter.
+To import it to Grafana, in the Grafana Dashboards page, click "New", then "Import", and upload the dashboard JSON file from the `docs` folder.
