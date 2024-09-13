@@ -20,6 +20,10 @@ scheduler = BackgroundScheduler()
 
 # Start background jobs using APScheduler
 scheduler.add_job(lambda: run(bluetooth_scan.run()), 'interval', seconds=constants.SCAN_FREQUENCY)  # Scan every 15 minutes
+# Run once at startup so we don't need to wait as long for data
+# Just that a couple log lines might be missed if you are running the Python file directly, since the logger isn't configured until later
+scheduler.add_job(lambda: run(bluetooth_scan.run()))
+
 scheduler.start()
 
 # Ensure scheduler stops on shutdown

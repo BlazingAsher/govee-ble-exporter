@@ -60,7 +60,7 @@ def simple_callback(device: BLEDevice, advertisement_data: AdvertisementData):
     if not service_info.name or not service_info.name.startswith("GV"):
         return
     else:
-        logger.info("%s (%s): %r", service_info.name, device.address, advertisement_data)
+        logger.debug("%s (%s): %r", service_info.name, device.address, advertisement_data)
 
     govee_device = GoveeBluetoothDeviceData()
     update_info = govee_device.update(service_info)
