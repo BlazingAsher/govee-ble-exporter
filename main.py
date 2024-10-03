@@ -1,6 +1,6 @@
-from asyncio import run
-from apscheduler.schedulers.background import BackgroundScheduler
-from contextlib import asynccontextmanager
+import asyncio
+
+from threading import Thread
 from fastapi import FastAPI
 from prometheus_client import disable_created_metrics, make_asgi_app
 
@@ -15,22 +15,8 @@ metrics_app = make_asgi_app()
 
 app.mount("/metrics", metrics_app)
 
-# Scheduler
-scheduler = BackgroundScheduler()
-
-# Start background jobs using APScheduler
-scheduler.add_job(lambda: run(bluetooth_scan.run()), 'interval', seconds=constants.SCAN_FREQUENCY)  # Scan every 15 minutes
-# Run once at startup so we don't need to wait as long for data
-# Just that a couple log lines might be missed if you are running the Python file directly, since the logger isn't configured until later
-scheduler.add_job(lambda: run(bluetooth_scan.run()))
-
-scheduler.start()
-
-# Ensure scheduler stops on shutdown
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    yield
-    scheduler.shutdown()
+thread = Thread(target=lambda: asyncio.run(bluetooth_scan.run()),  daemon=True)
+thread.start()
 
 if __name__ == "__main__":
     import uvicorn

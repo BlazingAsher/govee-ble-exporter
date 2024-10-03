@@ -23,7 +23,7 @@ from sensor_state_data import SensorLibrary, DeviceClass, DeviceKey
 
 from app.lib.structs import BluetoothServiceInfo
 from app.lib.govee_ble import GoveeBluetoothDeviceData
-from app.utils.constants import SCAN_DURATION
+from app.utils.constants import SCAN_DURATION, SCAN_FREQUENCY
 
 logger = logging.getLogger(__name__)
 
@@ -74,9 +74,13 @@ def simple_callback(device: BLEDevice, advertisement_data: AdvertisementData):
     last_received_update.labels(device_name=device_name).set(time.time())
 
 async def run():
-    scanner = BleakScanner(
-        simple_callback, None, scanning_mode="active"
-    )
-    logger.info("Starting Bluetooth scanner.")
-    async with scanner:
-        await asyncio.sleep(SCAN_DURATION)
+    while True:
+        scanner = BleakScanner(
+            simple_callback, None, scanning_mode="active"
+        )
+
+        logger.info("Starting Bluetooth scanner.")
+        async with scanner:
+            await asyncio.sleep(SCAN_DURATION)
+
+        await asyncio.sleep(SCAN_FREQUENCY)
